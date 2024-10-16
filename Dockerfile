@@ -17,4 +17,5 @@ RUN pip install -r requiriments.txt
 COPY . .
 
 EXPOSE 8080
-CMD [ "gunicorn", "--bind", "0.0.0.0:8080", "wsgi:app"]
+EXPOSE 8081
+CMD [ "gunicorn", "--bind", "0.0.0.0:8081", "wsgi:app"]

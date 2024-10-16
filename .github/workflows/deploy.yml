@@ -32,5 +32,5 @@ jobs:
             docker rm backend-dama
             docker rmi -f backend-dama:latest
             docker build -t backend-dama:latest .
-            docker run -d -it -p 8080:8080 --name backend-dama backend-dama:latest
+            docker run -d -it -p 8080:8081 --name backend-dama backend-dama:latest
             docker image prune -f
