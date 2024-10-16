@@ -1,0 +1,36 @@
+name: Deploying to Production
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: refs/heads/main
+
+      - name: copy files via scp
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASS }}
+          source: "*"
+          target: "/app/backend-dama/"
+      - name: docker commands teste
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASS }}
+          script: |
+            cd /app/backend-dama/
+            docker stop backend-dama
+            docker rm backend-dama
+            docker rmi -f backend-dama:latest
+            docker build -t backend-dama:latest .
+            docker run -d -it -p 8080:8080 --name backend-dama backend-dama:latest
+            docker image prune -f
