@@ -1,11 +1,11 @@
 from flask_cors import CORS
 from models.Database import Database
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Blueprint
 from models.Cryptography import Cryptography
 
 class UserLogin:
 
-    def __init__(self, app: Flask, db: Database):
+    def __init__(self, app: Blueprint, db: Database):
         self.db = db
         CORS(app)
         app.add_url_rule('/user/login', 'login_user', self.login_user, methods=['POST'])

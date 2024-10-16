@@ -1,10 +1,10 @@
 from models.Database import Database
-from flask import Flask, request, jsonify
+from flask import Flask,Blueprint, request, jsonify
 
 class TournamentManager:
 
 
-    def __init__(self, app: Flask, db: Database):
+    def __init__(self, app: Blueprint, db: Database):
         self.db = db
         app.add_url_rule('/tournaments', 'create_tournament', self.create_tournament, methods=['POST'])
         app.add_url_rule('/view-tournaments', 'get_tournaments', self.get_tournaments, methods=['GET'])

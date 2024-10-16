@@ -1,12 +1,12 @@
 from flask_cors import CORS
 from models.Database import Database
-from flask import Flask, request, jsonify
+from flask import Flask, Blueprint, request, jsonify
 from models.Cryptography import Cryptography
 
 class AdminRegister:
 
 
-    def __init__(self, app: Flask, db: Database):
+    def __init__(self, app: Blueprint, db: Database):
         self.db = db
         CORS(app)
         app.add_url_rule('/create-adm', 'register_admin', self.register_admin, methods=['POST'])
