@@ -3,3 +3,4 @@ flask_jwt_extended
 flask_cors
 bcrypt
 requests
+gunicorn
