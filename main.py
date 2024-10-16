@@ -9,7 +9,7 @@ from models.TournamentManager import TournamentManager
 
 app = Flask(__name__)
 CORS(app)
-db = Database("localhost", "root", "WikitelecomuGr+dX@u2%", 'federacao_dama')
+db = Database("localhost", "root", "WikitelecomuGr+dX@u2%", 'c')
 
 user_register = UserRegister(app, db)
 user_login = UserLogin(app, db)

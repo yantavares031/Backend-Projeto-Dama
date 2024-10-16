@@ -4,3 +4,4 @@ flask_cors
 bcrypt
 requests
 gunicorn
+mysql-connector-python
