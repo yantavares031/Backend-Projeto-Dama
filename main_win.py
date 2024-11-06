@@ -26,5 +26,7 @@ user_login = UserLogin(app, db)
 admin_login = AdminLogin(app, db)
 admin_register = AdminRegister(api_bp, db)
 tournament_manager = TournamentManager(api_bp, db)
-
 app.register_blueprint(api_bp)
+
+if __name__ == "__main__":
+    app.run()
