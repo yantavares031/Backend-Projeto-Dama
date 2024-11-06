@@ -9,7 +9,7 @@ from flask_jwt_extended import (
 
 class UserLogin:
 
-    def __init__(self, app: Blueprint, db: Database):
+    def __init__(self, app: Flask, db: Database):
         self.db = db
         app.config["JWT_SECRET_KEY"] = "sua_chave_super_secreta"
         app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
