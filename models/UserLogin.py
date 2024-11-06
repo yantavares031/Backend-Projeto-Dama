@@ -64,7 +64,7 @@ class UserLogin:
                     return jsonify({
                         'token': access_token,
                         'userName': user_name,
-                        'message': 'Login efeutuado com sucesso!'
+                        'message': 'Login efeutuado com sucesso'
                     })
                 else:
                     return jsonify({'message': 'Senha incorreta'}), 401
