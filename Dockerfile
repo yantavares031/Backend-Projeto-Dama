@@ -1,7 +1,7 @@
-FROM python:3.9
+FROM python:3.9-slim
 WORKDIR /app
 
-FROM python:3.9
+FROM python:3.9-slim
 
 # Instala dependências para locales
 RUN apt-get update && apt-get install -y locales
