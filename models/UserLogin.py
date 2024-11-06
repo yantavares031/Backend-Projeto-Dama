@@ -2,11 +2,17 @@ from flask_cors import CORS
 from models.Database import Database
 from flask import Flask, request, jsonify, Blueprint
 from models.Cryptography import Cryptography
+from datetime import timedelta
+from flask_jwt_extended import (
+    create_access_token, jwt_required, get_jwt_identity
+)
 
 class UserLogin:
 
     def __init__(self, app: Blueprint, db: Database):
         self.db = db
+        app.config["JWT_SECRET_KEY"] = "sua_chave_super_secreta"
+        app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
         CORS(app)
         app.add_url_rule('/user/login', 'login_user', self.login_user, methods=['POST'])
 
@@ -53,7 +59,13 @@ class UserLogin:
                 hasRegister = Cryptography.check_password(password, hashed_password_db)
 
                 if hasRegister:
-                    return jsonify({'message': 'Login feito com sucesso'})
+                    user_name = existing_user[1]
+                    access_token = create_access_token(identity=cpf)
+                    return jsonify({
+                        'token': access_token,
+                        'userName': user_name,
+                        'message': 'Login efeutuado com sucesso!'
+                    })
                 else:
                     return jsonify({'message': 'Senha incorreta'}), 401
                 
@@ -64,3 +76,10 @@ class UserLogin:
             return jsonify({"message": f"Campo ausente: {str(e)}"}), 400
         except Exception as e:
             return jsonify({"message": f"Erro interno: {str(e)}"}), 500
+
+    @jwt_required()
+    def protected(self):
+        current_user = get_jwt_identity()
+        return jsonify({
+            'message': f'bem vindo(a), user {current_user}'
+        })

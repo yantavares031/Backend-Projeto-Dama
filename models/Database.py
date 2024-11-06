@@ -40,7 +40,7 @@ class Database:
     def ensure_connection(self):
         if not self.connection or not self.connection.is_connected():
             print("Conexão perdida. Tentando reconectar...")
-            self.create_db_connection("federacao_dama")
+            self.create_db_connection()
 
     
     def close_connection(self):
